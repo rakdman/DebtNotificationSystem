@@ -1,0 +1,10 @@
+const mangoose = require('mongoose');
+
+const emailtemplate = new mangoose.Schema (
+    {
+        tname : {type:String, required:true},
+        text : {type:String, required:true }
+    }
+);
+
+module.exports = mangoose.model('emailtemplate',emailtemplate);
