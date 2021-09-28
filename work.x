@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 
 ### Configuration ###
 
@@ -14,7 +14,7 @@ RESTART_ARGS=
 
 ### Automation steps ###
 
-set -x
+#set -x
 
 # Pull latest code
 #if [[ -e $APP_DIR ]]; then
@@ -27,9 +27,9 @@ git clone https://github.com/rakdman/DebtNotificationSystem.git
 
 cd $HOME
 
-curl -sL https://deb.nodesource.com/setup_14.x -o setup_14.sh
+#curl -sL https://deb.nodesource.com/setup_14.x -o setup_14.sh
 
-sudo sh $HOME/setup_14.sh
+#sudo sh $HOME/setup_14.sh
 
 sudo apt-get install -y nodejs
 
