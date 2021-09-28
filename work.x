@@ -2,7 +2,6 @@
 APP_DIR=/home/ubuntu/
 rm -Rf $HOME/DebtNotificationSystem
 git clone https://github.com/rakdman/DebtNotificationSystem.git
-cd /home/ubuntu/
 sudo apt-get install -y nodejs
 sudo apt-get update
 sudo apt-get install npm
