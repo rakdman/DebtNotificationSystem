@@ -1,6 +1,8 @@
 ### DebtNotificationSystem
 
-This project is developed to send email reminders to the customers based on customer data loaded in the database and based on preconfigured business worklfows( after how many days each reminder to be sent until payment is recieved).
+This web application project is developed to send email reminders to the customers based on customer data loaded in the database and based on preconfigured business worklfows (i.e. after how many days each email reminder to be sent until payment is recieved).
+
+If a payment is received after loading a payment file then it will finish the worklfow instance of the customer.
 
 ### Technologies used: 
   ReactJS, Material UI - Frontend
