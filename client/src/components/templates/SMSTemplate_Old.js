@@ -1,84 +1,95 @@
-import React,{useContext, useState} from 'react';
-import {useHistory} from 'react-router-dom';
-import axios from 'axios';
-import swal from 'sweetalert';
-import HomeHeader from '../home/HomeHeader';
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import swal from "sweetalert";
+import HomeHeader from "../home/HomeHeader";
 
+import FormInputText from "../../shared/forminputtext";
+import FormInput from "../../shared/forminput";
 
+import { AuthContext } from "../../components/app-context/AuthContext";
 
-import FormInputText from '../../shared/forminputtext';
-import FormInput from '../../shared/forminput';
+function SMSTemplate() {
+  //let userAction;
+  let submitHandler;
 
-import {AuthContext} from '../../components/app-context/AuthContext';
+  const [templateName, setTemplateName] = useState();
+  const [templateText, setTemplateText] = useState();
 
-function SMSTemplate () 
-{
+  const { isLoggedIn } = useContext(AuthContext);
 
-//let userAction;
-let submitHandler;
+  let usehistory = useHistory();
 
-const [templateName,setTemplateName] = useState();
-const [templateText,setTemplateText] = useState();
+  console.log("in SMS Template before move to home");
+  console.log(isLoggedIn);
 
-const {isLoggedIn} = useContext(AuthContext);
+  if (!isLoggedIn) {
+    usehistory.push("/");
+  }
 
-let usehistory =useHistory();
+  let nameInput, textInput, message;
 
-console.log("in SMS Template before move to home");
-console.log(isLoggedIn);
-
-if (!isLoggedIn)
-{
-     usehistory.push("/");
-}
-
-let nameInput, textInput,message;
-
-
-const saveHandler = event => {
+  const saveHandler = (event) => {
     event.preventDefault();
     console.log("SMS Save submitHandler");
 
-    const payload = JSON.stringify({tname:templateName, text:templateText });
-    axios.post(`http://localhost:9090/api/template/create`,{tname:templateName,text:templateText}).then(res => { console.log(res.data.tname); });
+    const payload = JSON.stringify({ tname: templateName, text: templateText });
+    axios
+      .post(`api/template/create`, { tname: templateName, text: templateText })
+      .then((res) => {
+        console.log(res.data.tname);
+      });
 
     swal({
-        title:"Success",
-        text:"SMS template created successfully!",
-        icon: "success",
+      title: "Success",
+      text: "SMS template created successfully!",
+      icon: "success",
     });
 
-
     usehistory.push("/home");
-}
+  };
 
-
-const cancelHandler = event => {
+  const cancelHandler = (event) => {
     event.preventDefault();
     console.log("SMS Cancel submitHandler");
     usehistory.push("/home");
-}
+  };
 
-return(
-
+  return (
     <div className="App">
-        <HomeHeader/>
-        <form onSubmit={submitHandler}>
-            <b>SMS Template Creation</b>
-            <br/>
-            <label>Name</label>
-            <input type="Text" value={templateName} onChange={ event => {setTemplateName(event.target.value)}}></input>
-            <br/>
-            <label>Template</label>
-            <textarea type="Text" value={templateText} onChange={ event => {setTemplateText(event.target.value)}} rows="5" cols="40"></textarea>
-            <br/>
-            <button type="submit" onClick={saveHandler}>Save</button>
-            <button type="submit" onClick={cancelHandler}>Cancel</button>
-            
-        </form>
+      <HomeHeader />
+      <form onSubmit={submitHandler}>
+        <b>SMS Template Creation</b>
+        <br />
+        <label>Name</label>
+        <input
+          type="Text"
+          value={templateName}
+          onChange={(event) => {
+            setTemplateName(event.target.value);
+          }}
+        ></input>
+        <br />
+        <label>Template</label>
+        <textarea
+          type="Text"
+          value={templateText}
+          onChange={(event) => {
+            setTemplateText(event.target.value);
+          }}
+          rows="5"
+          cols="40"
+        ></textarea>
+        <br />
+        <button type="submit" onClick={saveHandler}>
+          Save
+        </button>
+        <button type="submit" onClick={cancelHandler}>
+          Cancel
+        </button>
+      </form>
     </div>
-
-);
+  );
 }
 
 export default SMSTemplate;

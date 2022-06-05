@@ -1,10 +1,6 @@
 [
-	{
-	   "billId":"BILL0202",
-	   "paymentAmount":900
-	},
-	{
-	   "billId":"BILL0202",
-	   "paymentAmount":100
-	}
+  {
+    "billId": "BILL0901",
+    "paymentAmount": 900
+  }
 ]

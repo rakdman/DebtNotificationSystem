@@ -2,6 +2,7 @@ const { readAllSMSTemplate } = require('../controller/template-controller');
 
 jwt = require('jsonwebtoken');
 module.exports = (req,res, next) => {
+
     console.log('Into Check auth middleware function'+req.headers.authorization);
 
     let token;
